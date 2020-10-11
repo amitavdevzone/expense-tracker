@@ -5,9 +5,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Add expense</div>
+                <div class="card-header">View expense</div>
                 <div class="card-body">
-                <form action="{{ route('expense.save') }}" method="post">
+                <form action="{{ route('expense.update') }}" method="post">
                     @include('expenses.expense-form-partial')
                 </form>
                 </div>

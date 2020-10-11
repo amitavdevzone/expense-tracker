@@ -12,6 +12,7 @@
             <th>Category</th>
             <th>Payment Method</th>
             <th>Date</th>
+            <th>View/Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +23,10 @@
                 <td>{{$expense->category}}</td>
                 <td>{{$expense->payment_method}}</td>
                 <td>{{$expense->date}}</td>
+                <td>
+                <a href="{{ route('expense.view', $expense->id) }}" class="mr-3">View</a>
+                <a href="{{ route('expense.delete', $expense->id) }}" class="mr-3">Delete</a>
+                </td>
             </tr>
         @endforeach
     </tbody>

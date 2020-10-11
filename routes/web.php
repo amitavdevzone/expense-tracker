@@ -15,4 +15,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/expenses', [ExpenseController::class, 'index'])->name('expense.list');
     Route::get('/expense/add', [ExpenseController::class, 'add'])->name('expense.add');
     Route::post('/expense/save', [ExpenseController::class, 'store'])->name('expense.save');
+    Route::get('/expense/view/{expense}', [ExpenseController::class, 'view'])->name('expense.view');
+    Route::post('/expense/update', [ExpenseController::class, 'update'])->name('expense.update');
+    Route::get('/expense/delete/{expense}', [ExpenseController::class, 'delete'])->name('expense.delete');
 });
