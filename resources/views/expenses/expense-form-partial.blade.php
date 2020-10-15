@@ -37,4 +37,5 @@
     </select>
 </div>
 
-<button class="btn btn-primary">Save</button>
+<button class="btn btn-success mr-3">Save</button>
+<a href="{{ route('expense.list') }}">Back</a>

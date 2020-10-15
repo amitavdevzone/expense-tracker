@@ -3,6 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <div class="col-sm-12">
+            <h1>Add Expense</h1>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Add expense</div>
