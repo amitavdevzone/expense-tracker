@@ -1,5 +1,7 @@
 <?php
 
+use Inertia\Inertia;
+use App\Models\Expense;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExpenseController;
 
@@ -18,4 +20,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/expense/view/{expense}', [ExpenseController::class, 'view'])->name('expense.view');
     Route::post('/expense/update', [ExpenseController::class, 'update'])->name('expense.update');
     Route::get('/expense/delete/{expense}', [ExpenseController::class, 'delete'])->name('expense.delete');
+});
+
+Route::get('check-inertia', function() {
+    $expenses = Expense::all();
+
+    return Inertia::render('Home/index', [
+        'expenses' => $expenses,
+    ]);
 });
