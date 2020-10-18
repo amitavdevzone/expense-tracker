@@ -1,4 +1,4 @@
-// require('./bootstrap');
+require('./bootstrap');
 
 import { App } from '@inertiajs/inertia-react'
 import React from 'react'
