@@ -1,5 +1,6 @@
 import React from "react";
 import { InertiaLink, usePage } from "@inertiajs/inertia-react";
+import route from "ziggy-js";
 
 const Menu: React.FC = () => {
   const SharedData: any = usePage();
@@ -24,9 +25,12 @@ const Menu: React.FC = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a className="nav-link" href="{{ route('expense.list') }}">
+              <InertiaLink
+                className="nav-link"
+                href={route("expense.list").url()}
+              >
                 Expenses
-              </a>
+              </InertiaLink>
             </li>
           </ul>
 

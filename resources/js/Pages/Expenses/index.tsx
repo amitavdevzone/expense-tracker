@@ -1,5 +1,6 @@
 import { InertiaLink } from "@inertiajs/inertia-react";
 import React from "react";
+import route from "ziggy-js";
 import Layout from "../../components/common/layout";
 import Expense from "../../interface/Expense";
 import PaginatedData from "../../interface/PaginatedData";
@@ -37,7 +38,7 @@ const ExpenseListPage: React.FC<Props> = ({ expenses }) => {
                       <td>{expense.date}</td>
                       <td>
                         <InertiaLink
-                          href={`expense/view/${expense.id}`}
+                          href={route("expense.view", { id: expense.id }).url()}
                           className="mr-3"
                         >
                           View
