@@ -16,9 +16,7 @@ const Layout: React.FC<Props> = props => {
             <h1 className="page-title">{pageTitle}</h1>
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-12">{children}</div>
-        </div>
+        {children}
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
 use App\Models\Expense;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -32,8 +33,11 @@ class ExpenseController extends Controller
         $expenses = Expense::orderByDesc('id')
             ->paginate(5);
 
-        return view('expenses.expense-index')
-            ->with('expenses', $expenses);
+        // return view('expenses.expense-index')
+        //     ->with('expenses', $expenses);
+        return Inertia::render('Expenses/index', [
+            'expenses' => $expenses,
+        ]);
     }
 
     public function add()
