@@ -1,3 +1,4 @@
+import { InertiaLink } from "@inertiajs/inertia-react";
 import React from "react";
 import Layout from "../../components/common/layout";
 import Expense from "../../interface/Expense";
@@ -35,12 +36,12 @@ const ExpenseListPage: React.FC<Props> = ({ expenses }) => {
                       <td>{expense.payment_method}</td>
                       <td>{expense.date}</td>
                       <td>
-                        <a
-                          href="{{ route('expense.view', $expense->id) }}"
+                        <InertiaLink
+                          href={`expense/view/${expense.id}`}
                           className="mr-3"
                         >
                           View
-                        </a>
+                        </InertiaLink>
                         <a
                           href="{{ route('expense.delete', $expense->id) }}"
                           className="mr-3"

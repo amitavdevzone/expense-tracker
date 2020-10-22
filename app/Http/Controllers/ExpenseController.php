@@ -33,8 +33,6 @@ class ExpenseController extends Controller
         $expenses = Expense::orderByDesc('id')
             ->paginate(5);
 
-        // return view('expenses.expense-index')
-        //     ->with('expenses', $expenses);
         return Inertia::render('Expenses/index', [
             'expenses' => $expenses,
         ]);
@@ -61,10 +59,15 @@ class ExpenseController extends Controller
 
     public function view(Expense $expense)
     {
-        return view('expenses.expense-view')
-            ->with('expense', $expense)
-            ->with('expenses', $this->expenseCategories)
-            ->with('paymentMethods', $this->paymentMethods);;
+        return Inertia::render('Expenses/view/index', [
+            'expense' => $expense,
+            'expenses' => $this->expenseCategories,
+            'paymentMethods' => $this->paymentMethods,
+        ]);
+        // return view('expenses.expense-view')
+        //     ->with('expense', $expense)
+        //     ->with('expenses', $this->expenseCategories)
+        //     ->with('paymentMethods', $this->paymentMethods);
     }
 
     public function update(Request $request)
