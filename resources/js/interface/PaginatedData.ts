@@ -1,3 +1,5 @@
+import PageLink from "./PageLink";
+
 interface PaginatedData {
   current_page: number;
   data: Array<any>;
@@ -5,7 +7,7 @@ interface PaginatedData {
   from: number;
   last_page: number;
   last_page_url: string;
-  links: Array<any>;
+  links: Array<PageLink>;
   next_page_url: string;
   path: string;
   per_page: number;

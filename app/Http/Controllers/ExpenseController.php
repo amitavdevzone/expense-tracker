@@ -31,7 +31,7 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::orderByDesc('id')
-            ->paginate(5);
+            ->paginate(10);
 
         return Inertia::render('Expenses/index', [
             'expenses' => $expenses,

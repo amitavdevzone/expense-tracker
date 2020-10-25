@@ -2,6 +2,7 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import React from "react";
 import route from "ziggy-js";
 import Layout from "../../components/common/layout";
+import Pagination from "../../components/common/pagination";
 import Expense from "../../interface/Expense";
 import PaginatedData from "../../interface/PaginatedData";
 
@@ -56,6 +57,8 @@ const ExpenseListPage: React.FC<Props> = ({ expenses }) => {
               </tbody>
             </table>
           </div>
+
+          <Pagination links={expenses.links} />
         </div>
       </div>
     </Layout>

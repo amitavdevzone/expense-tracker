@@ -15,7 +15,7 @@ class ExpenseSeeder extends Seeder
     public function run()
     {
         Expense::factory()
-            ->times(10)
+            ->times(100)
             ->create();
     }
 }
