@@ -81,7 +81,8 @@ class ExpenseController extends Controller
         Expense::where('id', $expenseId)
             ->update($postData);
 
-        return redirect()->back();;
+        return redirect()
+            ->back()->with('success', 'Expense updated');
     }
 
     public function delete(Expense $expense)

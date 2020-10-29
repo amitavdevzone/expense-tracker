@@ -1,4 +1,5 @@
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
+import { InertiaLink, usePage } from "@inertiajs/inertia-react";
 import React from "react";
 import route from "ziggy-js";
 import Expense from "../../../interface/Expense";
@@ -14,18 +15,43 @@ const ExpenseForm: React.FC<Props> = ({
   expenseCategories,
   paymentMethods
 }) => {
+  const page: any = usePage();
+  const [state, setState] = React.useState({
+    id: expense.id,
+    description: expense.description,
+    date: expense.date,
+    amount: expense.amount,
+    category: expense.category,
+    payment_method: expense.payment_method
+  });
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setState({
+      ...state,
+      [event.currentTarget.name]: event.currentTarget.value
+    });
+  };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    Inertia.post(route("expense.update").url(), state);
+  };
   return (
-    <form>
-      <input type="hidden" name="id" value={expense.id} />
+    <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="description">Description</label>
         <input
           type="text"
           name="description"
           className="form-control"
-          value={expense.description}
+          value={state.description}
+          onChange={handleChange}
         />
-        <div className="error"></div>
+        {page.props.errors?.description && (
+          <div className="error-feedback">
+            {page.props.errors.description[0]}
+          </div>
+        )}
       </div>
 
       <div className="form-group">
@@ -34,9 +60,12 @@ const ExpenseForm: React.FC<Props> = ({
           type="date"
           name="date"
           className="form-control"
-          value={expense.date}
+          value={state.date}
+          onChange={handleChange}
         />
-        <div className="error"></div>
+        {page.props.errors?.date && (
+          <div className="error-feedback">{page.props.errors.date[0]}</div>
+        )}
       </div>
 
       <div className="form-group">
@@ -45,27 +74,34 @@ const ExpenseForm: React.FC<Props> = ({
           type="text"
           name="amount"
           className="form-control"
-          value={expense.amount}
+          value={state.amount}
+          onChange={handleChange}
         />
-        <div className="error"></div>
+        {page.props.errors?.amount && (
+          <div className="error-feedback">{page.props.errors.amount[0]}</div>
+        )}
       </div>
 
       <div className="form-group">
         <label htmlFor="category">Category</label>
-        <select name="category" id="category" className="form-control">
+        <select
+          name="category"
+          id="category"
+          className="form-control"
+          value={state.category}
+          onChange={handleChange}
+        >
           {expenseCategories.map((category: string, index: number) => {
             return (
-              <option
-                value={category}
-                selected={category === expense.category}
-                key={index}
-              >
+              <option value={category} key={index}>
                 {category}
               </option>
             );
           })}
         </select>
-        <div className="error"></div>
+        {page.props.errors?.category && (
+          <div className="error-feedback">{page.props.errors.category[0]}</div>
+        )}
       </div>
 
       <div className="form-group">
@@ -74,20 +110,22 @@ const ExpenseForm: React.FC<Props> = ({
           name="payment_method"
           id="payment_method"
           className="form-control"
+          value={state.payment_method}
+          onChange={handleChange}
         >
           {paymentMethods.map((payment_method: string, index: number) => {
             return (
-              <option
-                value={payment_method}
-                selected={payment_method === expense.payment_method}
-                key={index}
-              >
+              <option value={payment_method} key={index}>
                 {payment_method}
               </option>
             );
           })}
         </select>
-        <div className="error"></div>
+        {page.props.errors?.payment_method && (
+          <div className="error-feedback">
+            {page.props.errors.payment_method[0]}
+          </div>
+        )}
       </div>
 
       <button className="btn btn-success mr-3">Save</button>
