@@ -10,23 +10,23 @@ interface Props {
   paymentMethods: Array<any>;
 }
 
-const ExpenseViewPage: React.FC<Props> = ({
+const ExpenseAddPage: React.FC<Props> = ({
   expense,
   expenses,
   paymentMethods
 }) => {
   return (
-    <Layout pageTitle="Expense details">
+    <Layout pageTitle="Add expense">
       <div className="row">
         <div className="col-md-6">
           <div className="card">
-            <div className="card-header">View expense</div>
+            <div className="card-header">Add expense</div>
             <div className="card-body">
               <ExpenseForm
                 expense={expense}
                 expenseCategories={expenses}
                 paymentMethods={paymentMethods}
-                submitUrl={route("expense.update")}
+                submitUrl={route("expense.save")}
               />
             </div>
           </div>
@@ -36,4 +36,4 @@ const ExpenseViewPage: React.FC<Props> = ({
   );
 };
 
-export default ExpenseViewPage;
+export default ExpenseAddPage;

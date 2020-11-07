@@ -40,10 +40,15 @@ class ExpenseController extends Controller
 
     public function add()
     {
-        return view('expenses.expenses-add')
+        return Inertia::render('Expenses/add/index')
             ->with('expense', new Expense)
             ->with('expenses', $this->expenseCategories)
             ->with('paymentMethods', $this->paymentMethods);
+
+        // return view('expenses.expenses-add')
+        //     ->with('expense', new Expense)
+        //     ->with('expenses', $this->expenseCategories)
+        //     ->with('paymentMethods', $this->paymentMethods);
     }
 
     public function store(Request $request)
@@ -54,7 +59,8 @@ class ExpenseController extends Controller
 
         Expense::create($postData);
 
-        return redirect()->back();
+        return redirect(\route('expense.list'))
+            ->with('success', 'Expense added');
     }
 
     public function view(Expense $expense)
@@ -64,10 +70,6 @@ class ExpenseController extends Controller
             'expenses' => $this->expenseCategories,
             'paymentMethods' => $this->paymentMethods,
         ]);
-        // return view('expenses.expense-view')
-        //     ->with('expense', $expense)
-        //     ->with('expenses', $this->expenseCategories)
-        //     ->with('paymentMethods', $this->paymentMethods);
     }
 
     public function update(Request $request)

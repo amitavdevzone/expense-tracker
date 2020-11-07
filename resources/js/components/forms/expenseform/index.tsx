@@ -1,28 +1,30 @@
 import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink, usePage } from "@inertiajs/inertia-react";
 import React from "react";
-import route from "ziggy-js";
+import route, { Router } from "ziggy-js";
 import Expense from "../../../interface/Expense";
 
 interface Props {
   expense: Expense;
   paymentMethods: Array<string>;
   expenseCategories: Array<string>;
+  submitUrl: Router;
 }
 
 const ExpenseForm: React.FC<Props> = ({
   expense,
   expenseCategories,
-  paymentMethods
+  paymentMethods,
+  submitUrl
 }) => {
   const page: any = usePage();
   const [state, setState] = React.useState({
     id: expense.id,
     description: expense.description,
     date: expense.date,
-    amount: expense.amount,
-    category: expense.category,
-    payment_method: expense.payment_method
+    amount: expense.amount || 0,
+    category: expense.category || expenseCategories[0],
+    payment_method: expense.payment_method || paymentMethods[0]
   });
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -34,7 +36,7 @@ const ExpenseForm: React.FC<Props> = ({
   };
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    Inertia.post(route("expense.update").url(), state);
+    Inertia.post(submitUrl.url(), state);
   };
   return (
     <form onSubmit={handleSubmit}>
