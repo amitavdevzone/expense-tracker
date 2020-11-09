@@ -1,5 +1,8 @@
+import { Inertia } from "@inertiajs/inertia";
 import { InertiaLink } from "@inertiajs/inertia-react";
 import React from "react";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import route from "ziggy-js";
 import Layout from "../../components/common/layout";
 import Pagination from "../../components/common/pagination";
@@ -11,6 +14,24 @@ interface Props {
 }
 
 const ExpenseListPage: React.FC<Props> = ({ expenses }) => {
+  const handleExpenseDelete = (expense: Expense) => {
+    confirmAlert({
+      title: "Delete an expense",
+      message: "Are you sure you want to delete this expense?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            Inertia.get(route("expense.delete", { expense: expense }).url());
+          }
+        },
+        {
+          label: "No",
+          onClick: () => {}
+        }
+      ]
+    });
+  };
   return (
     <Layout pageTitle="My Expense List">
       <div className="row">
@@ -44,12 +65,12 @@ const ExpenseListPage: React.FC<Props> = ({ expenses }) => {
                         >
                           View
                         </InertiaLink>
-                        <a
-                          href="{{ route('expense.delete', $expense->id) }}"
-                          className="mr-3"
+                        <span
+                          className="pointer"
+                          onClick={() => handleExpenseDelete(expense)}
                         >
                           Delete
-                        </a>
+                        </span>
                       </td>
                     </tr>
                   );

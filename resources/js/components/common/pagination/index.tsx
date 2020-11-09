@@ -13,6 +13,7 @@ const Pagination: React.FC<Props> = ({ links }) => {
         {links.map((link: PageLink, index: number) => {
           return (
             <li
+              key={index}
               className={`page-item ${link.url === null &&
                 "disabled"} ${link.active && "active"}`}
             >

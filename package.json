@@ -31,6 +31,7 @@
         "@types/react": "^16.9.52",
         "@types/ziggy-js": "^0.9.0",
         "react": "^16.14.0",
+        "react-confirm-alert": "^2.6.2",
         "react-dom": "^16.14.0",
         "ziggy-js": "^0.9.4"
     }

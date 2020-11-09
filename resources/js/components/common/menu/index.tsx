@@ -32,6 +32,14 @@ const Menu: React.FC = () => {
                 Expenses
               </InertiaLink>
             </li>
+            <li className="nav-item">
+              <InertiaLink
+                className="nav-link"
+                href={route("expense.add").url()}
+              >
+                Expense add
+              </InertiaLink>
+            </li>
           </ul>
 
           <ul className="navbar-nav ml-auto">
